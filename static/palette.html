@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>J13n Portfolio - OpenAI Palette Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @layer components {
+        .htmx-indicator {
+          opacity: 0;
+          transition: opacity 500ms ease-in;
+        }
+        .htmx-request .htmx-indicator {
+          opacity: 1;
+        }
+        .htmx-request.htmx-indicator {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 min-h-screen flex items-center justify-center">
+    <div
+      class="grid grid-flow-col grid-cols-max min-h-screen w-screen absolute z-10"
+      id="colors"
+    ></div>
+    <div
+      class="max-w-xl mx-auto py-20 z-30 bg-white/30 p-8 rounded-lg backdrop-blur-md w-full ring-1 ring-black/5"
+    >
+      <form
+        id="form"
+        hx-post="/palette/generate"
+        hx-trigger="submit"
+        hx-target="#colors"
+      >
+        <input
+          type="text"
+          name="prompt"
+          id="prompt"
+          class="w-full ring-1 ring-black/10 rounded-md px-4 py-2"
+        />
+        <button
+          type="submit"
+          class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-500/70 flex relative items-center justify-center"
+        >
+          <span class="">Generate</span>
+          <svg
+            class="animate-spin h-5 w-5 text-white htmx-indicator absolute"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+        </button>
+      </form>
+    </div>
+
+    <noscript>You must have JavaScript enabled to use this app.</noscript>
+    <script src="https://unpkg.com/htmx.org@1.9.4"></script>
+  </body>
+</html>
