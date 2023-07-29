@@ -41,6 +41,6 @@ def complete_text(sentence):
 @router.post('/generate')
 async def generate(prompt=Form('prompt')):
     divs = ""
-    for colors in complete_text(prompt):
-        divs += f'<div class="bg-[{colors}]"></div>'
+    for color in complete_text(prompt):
+        divs += f'<div class="bg-[{color}] hover:mix-blend-difference relative flex justify-center"><div class="absolute">{color}</div></div>'
     return HTMLResponse(divs)
